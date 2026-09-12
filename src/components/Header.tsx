@@ -56,6 +56,7 @@ export default function Header() {
         </a>
 
         <div className="flex gap-6">
+          <a href="#home">Home</a>
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
           <a href="#experience">Experience</a>

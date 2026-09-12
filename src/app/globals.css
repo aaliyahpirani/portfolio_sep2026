@@ -31,3 +31,11 @@ body {
   color: var(--foreground);
   font-family: var(--font-source-serif), var(--font-montserrat), var(--font-symphony);
 }
+
+.accent-stripes {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgb(69 21 27 / 0.18) 0 25px,
+    transparent 10px 60
+  );
+}
