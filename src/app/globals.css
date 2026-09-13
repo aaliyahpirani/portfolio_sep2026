@@ -5,6 +5,7 @@
   --foreground: #171717;
   --accent_red: #45151b;
   --accent_mauve: #955155;
+  --accent_yellow: #FFF7d6;
 }
 
 @theme inline {
@@ -12,6 +13,7 @@
   --color-foreground: var(--foreground);
   --color-accent-red: var(--accent_red);
   --color-accent-mauve: var(--accent_mauve);
+  --color-accent-yellow: var(--accent_yellow);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-symphony: var(--font-symphony);
@@ -38,4 +40,49 @@ body {
     rgb(69 21 27 / 0.18) 0 25px,
     transparent 10px 60
   );
+}
+
+.projects-scroll {
+  overflow-x: scroll;
+}
+
+.projects-scroll::-webkit-scrollbar {
+  display: block;
+  height: 8px;
+  background: color-mix(in srgb, var(--accent_mauve) 25%, var(--background));
+}
+
+.projects-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--accent_mauve) 40%, var(--background));
+  border-radius: 9999px;
+}
+
+.projects-scroll:hover::-webkit-scrollbar-track,
+.projects-scroll:active::-webkit-scrollbar-track {
+  border-color: var(--accent_mauve);
+}
+
+.projects-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--accent_red) 40%, var(--background));
+  border-radius: 9999px;
+}
+
+.projects-scroll:hover::-webkit-scrollbar-thumb,
+.projects-scroll::-webkit-scrollbar-thumb:hover,
+.projects-scroll::-webkit-scrollbar-thumb:active {
+  background: var(--accent_red);
+}
+
+@supports (-moz-appearance: none) {
+  .projects-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--accent_red) 40%, var(--background))
+      color-mix(in srgb, var(--accent_mauve) 25%, var(--background));
+  }
+
+  .projects-scroll:hover,
+  .projects-scroll:active {
+    scrollbar-color: var(--accent_red) var(--accent_mauve);
+  }
 }

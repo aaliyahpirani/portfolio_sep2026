@@ -1,6 +1,10 @@
 import Header from "@/components/Header";
 import HomeSection from "@/components/Home";
 import AboutMe from "@/components/AboutMe";
+import Projects from "@/components/Projects";
+import Experience from "@/components/Experience";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -12,18 +16,14 @@ export default function Home() {
 
         <AboutMe />
 
-        <section id="projects" className="min-h-screen px-8 py-24">
-          <h2 className="font-symphony text-3xl">Projects</h2>
-        </section>
+        <Projects />
 
-        <section id="experience" className="min-h-screen px-8 py-24">
-          <h2 className="font-symphony text-3xl">Experience</h2>
-        </section>
+        <Experience />
 
-        <section id="contact" className="min-h-screen px-8 py-24">
-          <h2 className="font-symphony text-3xl">Contact</h2>
-        </section>
+        <Contact />
       </main>
+
+      <Footer />
     </div>
   );
 }
