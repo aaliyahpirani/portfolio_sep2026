@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./stem-timeline.css";
 
 :root {
   --background: #ffefef;
@@ -19,6 +20,9 @@
   --font-symphony: var(--font-symphony);
   --font-serif: var(--font-source-serif);
   --font-montserrat: var(--font-montserrat);
+  --font-pinyon: var(--font-pinyon);
+  --font-imbue-light: var(--font-imbue-light);
+  --font-imbue-regular: var(--font-imbue-regular);
 }
 
 /* @media (prefers-color-scheme: dark) {

@@ -25,7 +25,7 @@ export default function AboutMe() {
       />
 
       <h2 className="relative text-center text-5xl text-foreground md:text-6xl">
-        <span className="font-symphony pr-4 text-7xl">About</span>
+        <span className="font-pinyon pr-4 text-7xl">About</span>
         <span className="ml-2 font-serif">me</span>
       </h2>
 

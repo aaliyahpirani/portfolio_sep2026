@@ -98,7 +98,7 @@ export default function Projects() {
         className="flex flex-1 scroll-mt-20 flex-col items-start px-6 py-24 sm:px-20 md:px-16 lg:px-24 xl:px-32"
       >
         <h2 className="relative text-left text-5xl text-foreground md:text-6xl">
-          <span className="font-symphony text-7xl">Projects</span>
+          <span className="font-pinyon text-7xl">Projects</span>
         </h2>
 
         <div className="projects-scroll mt-12 flex w-full max-w-7xl flex-row gap-12 pb-8">
@@ -123,9 +123,9 @@ export default function Projects() {
       <div className="flex text-center">
         <div className="bg-accent-mauve w-full h-full">
             <h1 className="flex flex-wrap items-baseline justify-center gap-x-4 px-4 pt-6 text-2xl text-background">
-                <span className="font-symphony text-7xl">Awards</span>
-                <span className="font-serif text-5xl">and</span>
-                <span className="font-symphony text-7xl">Recognition</span>
+                <span className="font-pinyon text-7xl">Awards</span>
+                <span className="font-imbue-light text-6xl">and</span>
+                <span className="font-pinyon text-7xl">Recognition</span>
             </h1>
             <div className="mx-auto mt-12 flex w-full max-w-7xl flex-col divide-y divide-background/40 px-10 pb-8 text-left">
           {awards.map((award) => (

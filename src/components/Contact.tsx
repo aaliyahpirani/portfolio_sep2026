@@ -7,7 +7,7 @@ export default function Contact() {
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-24 sm:px-20 md:px-16 lg:px-24 xl:px-32"
     >
       <h2 className="relative text-center text-5xl text-foreground md:text-6xl">
-        <span className="font-symphony pr-4 text-7xl">Contact</span>
+        <span className="font-pinyon pr-4 text-7xl">Contact</span>
         <span className="ml-2 font-serif">me</span>
       </h2>
 

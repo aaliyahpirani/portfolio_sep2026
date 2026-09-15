@@ -1,105 +1,150 @@
-import Image from "next/image";
+"use client";
 
-const roles = [
+import { useEffect, useRef } from "react";
+
+const roles: {
+  title: string;
+  date: string;
+  description: string;
+  stemColor: string;
+}[] = [
   {
     title: "Role one",
     date: "2025 — Present",
     description: "Swap this for a team, what you worked on, and what you shipped.",
-    side: "left",
+    stemColor: "red",
   },
   {
     title: "Role two",
     date: "2024 — 2025",
     description: "A second role. Keep adding objects to the roles array.",
-    side: "right",
+    stemColor: "mauve",
   },
   {
     title: "Role three",
     date: "2023 — 2024",
-    description: "A third writeup. These sit on either side of the rose stem.",
-    side: "left",
+    description: "A third writeup. Click a node on the stem to scroll to that role.",
+    stemColor: "gold",
   },
   {
     title: "Role four",
-    date: "2023 — 2024",
-    description: "A third writeup. These sit on either side of the rose stem.",
-    side: "right",
+    date: "2022 — 2023",
+    description: "A fourth writeup. These alternate on either side of the stem.",
+    stemColor: "red",
   },
   {
     title: "Role five",
-    date: "2023 — 2024",
-    description: "A third writeup. These sit on either side of the rose stem.",
-    side: "left",
+    date: "2021 — 2022",
+    description: "A fifth writeup. Drop your SVGs into the node slots later.",
+    stemColor: "mauve",
   },
 ];
 
+function SvgSlot() {
+  return (
+    <span className="stem-icon-slot" aria-hidden="true">
+      {/* Import an SVG here later */}
+    </span>
+  );
+}
+
 export default function Experience() {
+  const rootRef = useRef<HTMLElement>(null);
+  const fillRef = useRef<HTMLDivElement>(null);
+  const stemRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    const fill = fillRef.current;
+    const stem = stemRef.current;
+    if (!root || !fill || !stem) return;
+
+    const posts = [...root.querySelectorAll<HTMLElement>(".stem-post")];
+    const colors = ["color-red", "color-mauve", "color-gold"];
+
+    const update = () => {
+      const mid = window.innerHeight * 0.5;
+      const rootBox = root.getBoundingClientRect();
+      const start = rootBox.top;
+      const end = rootBox.bottom;
+      const progress = Math.min(1, Math.max(0, (mid - start) / (end - start)));
+      fill.style.height = `${progress * 100}%`;
+
+      const revealLine = window.innerHeight * 0.8;
+      let activeColor = "red";
+
+      posts.forEach((post) => {
+        const top = post.getBoundingClientRect().top;
+        if (top < revealLine) {
+          post.classList.add("is-visible");
+        } else {
+          post.classList.remove("is-visible");
+        }
+        if (top < mid) {
+          activeColor = post.dataset.stemColor ?? "red";
+        }
+      });
+
+      stem.classList.remove(...colors);
+      stem.classList.add(`color-${activeColor}`);
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  const scrollToPost = (index: number) => {
+    const post = rootRef.current?.querySelectorAll<HTMLElement>(".stem-post")[index];
+    if (!post) return;
+    const top = post.getBoundingClientRect().top + window.scrollY;
+    const target = top - window.innerHeight / 2 + post.offsetHeight / 2;
+    window.scrollTo({ top: target, behavior: "smooth" });
+  };
+
   return (
     <section
       id="experience"
-      className="relative flex bg-accent-yellow min-h-screen flex-col overflow-hidden px-6 py-24 sm:px-20 md:px-16 lg:px-24 xl:px-32"
+      ref={rootRef}
+      className="relative flex min-h-screen flex-col px-6 py-24 sm:px-20 md:px-16 lg:px-24 xl:px-32"
     >
-      <Image
-        src="/rose.png"
-        alt=""
-        fill
-        aria-hidden="true"
-        className="pointer-events-none object-contain object-[45%_top]"
-        sizes="100vw"
-      />
-
-      <h2 className="relative text-center text-5xl text-foreground md:text-6xl">
+      <h2 className="relative z-10 mb-16 text-center text-5xl text-foreground md:text-6xl">
         <span className="font-serif text-7xl">Experience</span>
       </h2>
 
-      <div className="relative z-10 mx-auto mt-12 flex w-full max-w-5xl flex-col gap-12">
-        {roles.map((role) => {
-          const isRight = role.side === "right";
+      <div className="stem-timeline">
+        <div ref={stemRef} className="stem-track color-red">
+          <div className="stem-track__line" />
+          <div ref={fillRef} className="stem-track__fill" />
+        </div>
 
-          return (
+        <div className="stem-posts">
+          {roles.map((role, i) => (
             <article
               key={role.title}
-              className={`w-full max-w-sm md:w-1/2 ${
-                isRight ? "md:ml-auto md:pl-8" : "md:pr-8 md:text-right"
-              }`}
+              className="stem-post"
+              data-stem-color={role.stemColor}
             >
-              <div
-                className={`relative w-fit max-w-full ${
-                  isRight ? "" : "md:ml-auto"
-                }`}
+              <button
+                type="button"
+                className="stem-node"
+                aria-label={`Jump to ${role.title}`}
+                onClick={() => scrollToPost(i)}
               >
-                <h3 className="font-serif text-2xl text-accent-red">
-                  {role.title}
-                </h3>
-                <h4 className="w-0 min-w-full font-serif text-foreground">
-                  {role.date}
-                </h4>
-                <div
-                  aria-hidden="true"
-                  className="relative mt-2 hidden h-3 md:block"
-                >
-                  <span
-                    className={`absolute top-1/2 h-px -translate-y-1/2 bg-accent-red ${
-                      isRight
-                        ? "left-[calc(-2rem)] right-0"
-                        : "left-0 right-[calc(-2rem)]"
-                    }`}
-                  />
-                  <span
-                    className={`absolute top-1/2 size-2.5 -translate-y-1/2 rounded-full bg-accent-red ${
-                      isRight
-                        ? "left-[calc(-2rem)] -translate-x-1/2"
-                        : "right-[calc(-2rem)] translate-x-1/2"
-                    }`}
-                  />
-                </div>
+                <SvgSlot />
+              </button>
+              <div className="stem-post__body">
+                <p className="stem-post__meta">{role.date}</p>
+                <h3 className="stem-post__title">{role.title}</h3>
+                <p className="stem-post__copy">{role.description}</p>
               </div>
-              <p className="mt-3 font-serif leading-relaxed text-foreground">
-                {role.description}
-              </p>
             </article>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </section>
   );
