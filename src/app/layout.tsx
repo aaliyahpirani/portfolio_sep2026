@@ -41,11 +41,26 @@ const imbue_regular = localFont({
   src: "./fonts/Imbue_14pt-Medium.ttf",
 });
 
+const garamond = localFont({
+  variable: "--font-garamond",
+  src: "./fonts/CormorantGaramond-VariableFont_wght.ttf",
+});
+
+const playfair = localFont({
+  variable: "--font-playfair",
+  src: "./fonts/PlayfairDisplay-VariableFont_wght.ttf",
+});
+
+const playfair_italic = localFont({
+  variable: "--font-playfair-italic",
+  src: "./fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf",
+});
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${symphony.variable} ${sourceSerif.variable} ${montserrat.variable} ${pinyon.variable} ${imbue_light.variable} ${imbue_regular.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${playfair_italic.variable} ${symphony.variable} ${sourceSerif.variable} ${montserrat.variable} ${pinyon.variable} ${imbue_light.variable} ${imbue_regular.variable} ${garamond.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

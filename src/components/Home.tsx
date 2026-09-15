@@ -17,9 +17,9 @@ export default function HomeSection() {
         </div>
 
         <div className="flex w-full flex-col items-center text-center md:w-2/3">
-          <h1 className="font-pinyon text-5xl text-foreground md:text-6xl">
+          <h1 className=" items-center text-foreground">
             <span className="font-pinyon text-7xl">Aaliyah</span>
-            <span className="ml-10 font-imbue-light text-6xl">Pirani</span>
+            <span className="pl-6 font-pinyon text-7xl">Pirani</span>
           </h1>
           <p className="mt-4 font-serif text-xl text-foreground-red">
           Third year HBSc student in Computer Science and Quantitative Biology at the University of Toronto

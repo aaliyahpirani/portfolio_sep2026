@@ -23,6 +23,9 @@
   --font-pinyon: var(--font-pinyon);
   --font-imbue-light: var(--font-imbue-light);
   --font-imbue-regular: var(--font-imbue-regular);
+  --font-garamond: var(--font-garamond);
+  --font-playfair: var(--font-playfair);
+  --font-playfair-italic: var(--font-playfair-italic);
 }
 
 /* @media (prefers-color-scheme: dark) {
