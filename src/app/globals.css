@@ -42,11 +42,11 @@ body {
 }
 
 .home-enter {
-  animation: home-rise 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: home-rise 2.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .home-enter--portrait {
-  animation-duration: 1.45s;
+  animation-duration: 2.8s;
   animation-name: home-portrait;
 }
 
@@ -70,8 +70,6 @@ body {
   --mx: 50%;
   --my: 38%;
   --home-leave: 0;
-  --px: 0px;
-  --py: 0px;
   /*
     THRESHOLDS — edit these:
     --home-leave-threshold: how much of the hero you scroll before leave = 1.
@@ -81,9 +79,9 @@ body {
     --home-stagger: delay between items (same units as --home-leave, 0–1).
       Smaller = closer together. Larger = more separated.
   */
-  --home-leave-threshold: 0.1;
-  --home-fade-span: 0.3;
-  --home-stagger: 0.12;
+  --home-leave-threshold: 0.55;
+  --home-fade-span: 0.22;
+  --home-stagger: 0.14;
   overflow: hidden;
 }
 
@@ -93,7 +91,7 @@ body {
   inset: 0;
   z-index: 1;
   background: radial-gradient(
-    28rem circle at var(--mx) var(--my),
+    28rem circle at var(--mx, 50%) var(--my, 38%),
     rgb(255 247 214 / 0.22),
     transparent 58%
   );
@@ -103,6 +101,69 @@ body {
 .home-stage {
   position: relative;
   z-index: 2;
+  display: grid;
+  min-height: calc(100svh - 5.5rem);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 768px) {
+  .home-stage {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  }
+}
+
+.home-portrait-panel {
+  position: relative;
+  min-height: 42vh;
+  overflow: hidden;
+  background: transparent;
+}
+
+@media (min-width: 768px) {
+  .home-portrait-panel {
+    min-height: 0;
+    align-self: stretch;
+    height: 100%;
+  }
+}
+
+.home-enter--portrait {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.home-portrait-image {
+  object-fit: cover;
+  object-position: center 18%;
+}
+
+.home-copy-col {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .home-copy-col {
+    padding-inline: 4rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .home-copy-col {
+    padding-inline: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-copy-col {
+    padding-inline: 5rem;
+  }
 }
 
 .home-leave {
@@ -115,60 +176,79 @@ body {
   transform: translate3d(0, calc(var(--leave-amt) * 18px), 0);
 }
 
-.home-leave--actions {
+.home-leave--title {
   --d: 0;
 }
 
-.home-leave--meta {
+.home-leave--copy {
   --d: calc(var(--home-stagger) * 1);
 }
 
-.home-leave--copy {
+.home-leave--meta {
   --d: calc(var(--home-stagger) * 2);
 }
 
-.home-leave--title {
+.home-leave--actions {
   --d: calc(var(--home-stagger) * 3);
 }
 
 .home-leave--portrait {
   --d: calc(var(--home-stagger) * 4);
-}
-
-.home-portrait-shift {
-  transform: translate3d(var(--px), var(--py), 0);
-  will-change: transform;
+  position: absolute;
+  inset: 0;
+  transform: none;
 }
 
 @media (pointer: coarse) {
   .home-spotlight {
     display: none;
   }
+}
 
-  .home-portrait-shift {
-    transform: none;
+.home-band {
+  --band-enter: 0;
+  --band-leave: 0;
+  --band-stagger: 0.18;
+  --band-fade-span: 0.28;
+  --stripe-x: 0px;
+  overflow: hidden;
+}
+
+.home-band-item {
+  --leave-amt: clamp(
+    0,
+    (var(--band-leave) - var(--d, 0)) / var(--band-fade-span),
+    1
+  );
+  opacity: calc(var(--band-enter) * (1 - var(--leave-amt)));
+}
+
+.home-band-item--stripes {
+  --d: 0;
+}
+
+.home-band-item--headline {
+  --d: 0;
+}
+
+.home-band-item--body {
+  --d: var(--band-stagger);
+}
+
+.home-type-caret {
+  display: inline-block;
+  width: 0.07em;
+  height: 0.9em;
+  margin-left: 0.12em;
+  vertical-align: -0.05em;
+  background: currentColor;
+  animation: home-caret 1s step-end infinite;
+}
+
+@keyframes home-caret {
+  50% {
+    opacity: 0;
   }
-}
-
-.home-band > * {
-  opacity: 0;
-  transform: translateY(18px);
-  transition:
-    opacity 1.15s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.home-band.is-revealed > * {
-  opacity: 1;
-  transform: none;
-}
-
-.home-band.is-revealed > :nth-child(2) {
-  transition-delay: 0.12s;
-}
-
-.home-band.is-revealed > :nth-child(3) {
-  transition-delay: 0.28s;
 }
 
 @keyframes home-rise {
@@ -185,19 +265,17 @@ body {
 @keyframes home-portrait {
   from {
     opacity: 0;
-    transform: scale(1.045);
     filter: saturate(0.82);
   }
   to {
     opacity: 1;
-    transform: scale(1);
     filter: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .home-enter,
-  .home-band > * {
+  .home-band-item {
     animation: none;
     opacity: 1;
     transform: none;
@@ -205,8 +283,11 @@ body {
     transition: none;
   }
 
+  .home-type-caret {
+    display: none;
+  }
+
   .home-stage,
-  .home-portrait-shift,
   .home-leave {
     opacity: 1;
     transform: none;
@@ -222,8 +303,9 @@ body {
   background-image: repeating-linear-gradient(
     90deg,
     rgb(69 21 27 / 0.18) 0 25px,
-    transparent 10px 60
+    transparent 25px 60px
   );
+  background-position: var(--stripe-x) 0;
 }
 
 .projects-scroll {
@@ -263,62 +345,15 @@ body {
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: center;
-  column-gap: 3.25rem;
+  column-gap: 0.7rem;
   row-gap: 0;
-}
-
-.home-name-hit {
-  position: relative;
-  display: inline-block;
+  letter-spacing: -0.05em;
 }
 
 .home-name {
   display: inline-block;
+  font-size: clamp(3.5rem, 8vw, 7.25rem);
   line-height: 1;
-  transform: scale(1);
-  transform-origin: center;
-  opacity: 1;
-  transition:
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.35s ease;
-}
-
-.home-name-hit--first .home-name {
-  transform-origin: right;
-}
-
-.home-name-hit--last .home-name {
-  transform-origin: left;
-}
-
-.home-names.is-picking .home-name {
-  opacity: 0.28;
-}
-
-.home-name-hit.is-hovered .home-name,
-.home-name-hit.is-open .home-name {
-  opacity: 1;
-  transform: scale(1.12);
-}
-
-.home-name-note {
-  position: absolute;
-  z-index: 3;
-  top: calc(100% + 0.4rem);
-  left: 50%;
-  width: min(22rem, 72vw);
-  margin: 0;
-  padding: 0.15rem 0.4rem;
-  background: color-mix(in srgb, var(--background) 88%, transparent);
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(-50%);
-  transition: opacity 0.2s ease;
-}
-
-.home-name-hit.is-open .home-name-note {
-  opacity: 1;
-  pointer-events: auto;
 }
 
 .nav-hover {
@@ -363,9 +398,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .nav-hover,
-  .nav-mark::after,
-  .home-name,
-  .home-name-note {
+  .nav-mark::after {
     transition: none;
   }
 }

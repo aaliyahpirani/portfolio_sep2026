@@ -46,7 +46,7 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-10 bg-accent-red transition-transform duration-300 ${
+      className={`sticky top-0 z-10 bg-accent-red/70 backdrop-blur-md transition-transform duration-300 ${
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >

@@ -15,31 +15,31 @@ const awards = [
     {
         title: "TD Scholarship for Community Leadership",
         amount: "70,000",
-        date: "2024",
+        date: "May 2024",
         description: 
-        "Swap this for what you built, what it does, and the stack you used.  Swap this for what you built, what it does, and the stack you used.",
+        "One of twenty Canadian recipients of the TD Scholarship for Community Leadership, awarded for immense display of impact and leadership in the community.",
           
       },
       {
-        title: "Project two",
-        amount: "70,000",
-        date: "August - September 2026", 
+        title: "Department of Computer Science Research Scholarship",
+        amount: "12,000",
+        date: "March 2026", 
         description:
-          "A second writeup. Add a link below if the repo or live demo is public.",
+          "Awarded to outstanding students in the department of computer science in the University of Toronto to pursue research in the field.",
       },
       {
-        title: "Project three",
-        amount: "70,000",
-        date: "July 2026",
+        title: "Howard Ferguson Admission Scholarship",
+        amount: "12,000",
+        date: "September 2024",
         description:
-          "Keep adding objects to the projects array — this list grows with the page.",
+          "Awarded to an outstanding non-Ontario resident to pursue a degree at the University of Toronto.",
       },
       {
-        title: "Project four",
-        amount: "70,000",
-        date: "July 2026",
+        title: "University of Toronto Scholar",
+        amount: "1,500",
+        date: "July 2025",
         description:
-          "Keep adding objects to the projects array — this list grows with the page.",
+          "Recognition of academic excellence in the Faculty of Arts and Science.",
       },
 
 ]
@@ -49,19 +49,21 @@ const projects = [
     date: "September 2026",
     description:
       "Swap this for what you built, what it does, and the stack you used.  Swap this for what you built, what it does, and the stack you used.",
-      
+    tech: "React, Next.js, Tailwind CSS, TypeScript",
   },
   {
     title: "Project two",
     date: "August - September 2026", 
     description:
       "A second writeup. Add a link below if the repo or live demo is public.",
+    tech: "React, Next.js, Tailwind CSS, TypeScript",
   },
   {
     title: "Project three",
     date: "July 2026",
     description:
       "Keep adding objects to the projects array — this list grows with the page.",
+    tech: "React, Next.js, Tailwind CSS, TypeScript",
   },
 
   {
@@ -69,6 +71,7 @@ const projects = [
     date: "July 2026",
     description:
       "Keep adding objects to the projects array — this list grows with the page.",
+    tech: "React, Next.js, Tailwind CSS, TypeScript",
   },
 ];
 
@@ -98,7 +101,7 @@ export default function Projects() {
         className="flex flex-1 scroll-mt-20 flex-col items-start px-6 py-24 sm:px-20 md:px-16 lg:px-24 xl:px-32"
       >
         <h2 className="relative text-left text-5xl text-foreground md:text-6xl">
-          <span className="font-pinyon text-7xl">Projects</span>
+          <span className="font-playfair text-7xl">Projects</span>
         </h2>
 
         <div className="projects-scroll mt-12 flex w-full max-w-7xl flex-row gap-12 pb-8">
@@ -123,7 +126,7 @@ export default function Projects() {
       <div className="flex text-center">
         <div className="bg-accent-mauve w-full h-full">
             <h1 className="flex flex-wrap items-baseline justify-center gap-x-4 px-4 pt-6 text-2xl text-background">
-                <span className="pt-10 font-pinyon text-7xl">Awards and Recognition</span>
+                <span className="pt-10 font-playfair text-7xl">Awards and Recognition</span>
             </h1>
             <div className="mx-auto mt-12 flex w-full max-w-7xl flex-col divide-y divide-background/40 px-10 pb-8 text-left">
           {awards.map((award) => (

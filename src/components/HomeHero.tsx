@@ -1,52 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-
-const NAME_NOTES = {
-  first: {
-    label: "Aaliyah",
-    body: "From Arabic — عَالِيَة — “exalted,” “lofty,” “sublime.",
-  },
-  last: {
-    label: "Pirani",
-    body: "A Khoja / Gujarati surname from pīr, a Sufi saint or spiritual guide, and -ani, “of.",
-  },
-} as const;
+import { useEffect, useRef } from "react";
 
 export default function HomeHero() {
   const rootRef = useRef<HTMLDivElement>(null);
-  const hoverTimer = useRef<number>(0);
-  const [hovered, setHovered] = useState<null | "first" | "last">(null);
-  const [openName, setOpenName] = useState<null | "first" | "last">(null);
   const target = useRef({ mx: 50, my: 38, leave: 0 });
-  const current = useRef({ mx: 50, my: 38, leave: 0, px: 0, py: 0 });
-
-  const enterName = (which: "first" | "last") => {
-    setHovered(which);
-    window.clearTimeout(hoverTimer.current);
-    const delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      ? 0
-      : 1000;
-    hoverTimer.current = window.setTimeout(() => setOpenName(which), delay);
-  };
-
-  const leaveName = () => {
-    setHovered(null);
-    window.clearTimeout(hoverTimer.current);
-    setOpenName(null);
-  };
-
-  useEffect(() => {
-    return () => window.clearTimeout(hoverTimer.current);
-  }, []);
+  const current = useRef({ mx: 50, my: 38, leave: 0 });
 
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const finePointer = window.matchMedia("(pointer: fine)").matches;
     if (reduce) return;
 
     let frame = 0;
@@ -56,17 +22,11 @@ export default function HomeHero() {
       const c = current.current;
       c.mx += (t.mx - c.mx) * 0.07;
       c.my += (t.my - c.my) * 0.07;
-      c.leave += (t.leave - c.leave) * 0.09;
-      const nx = (c.mx - 50) / 50;
-      const ny = (c.my - 50) / 50;
-      c.px += (nx * 14 - c.px) * 0.07;
-      c.py += (ny * 10 - c.py) * 0.07;
+      c.leave += (t.leave - c.leave) * 0.02;
 
       root.style.setProperty("--mx", `${c.mx}%`);
       root.style.setProperty("--my", `${c.my}%`);
       root.style.setProperty("--home-leave", c.leave.toFixed(4));
-      root.style.setProperty("--px", `${c.px.toFixed(2)}px`);
-      root.style.setProperty("--py", `${c.py.toFixed(2)}px`);
       frame = requestAnimationFrame(tick);
     };
 
@@ -107,77 +67,62 @@ export default function HomeHero() {
     >
       <div className="home-spotlight" aria-hidden="true" />
 
-      <div className="home-stage flex items-start px-6 pt-4 pb-16 sm:px-20 md:px-16 md:pt-6 lg:px-24 lg:pt-8 xl:px-32">
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-10 md:flex-row md:items-center md:gap-16">
-          <div className="home-leave home-leave--portrait w-full max-w-xs shrink-0 sm:max-w-sm md:w-1/3 md:max-w-none">
-            <div className="home-enter home-enter--portrait overflow-hidden">
-              <div className="home-portrait-shift">
-                <Image
-                  src="/portrait.jpg"
-                  alt="Aaliyah Pirani"
-                  width={900}
-                  height={1200}
-                  className="h-auto w-full"
-                  priority
-                />
-              </div>
+      <div className="home-stage">
+        <div className="home-portrait-panel">
+          <div className="home-leave home-leave--portrait">
+            <div className="home-enter home-enter--portrait">
+              <Image
+                src="/portrait.jpg"
+                alt="Aaliyah Pirani"
+                fill
+                sizes="(min-width: 768px) 33vw, 100vw"
+                className="home-portrait-image"
+                priority
+              />
             </div>
           </div>
+        </div>
 
-          <div className="flex w-full flex-col items-center text-center md:w-2/3">
-            <div className="home-leave home-leave--title">
-              <h1
-                className={`home-enter home-enter--title home-names text-foreground ${hovered || openName ? "is-picking" : ""}`}
+        <div className="home-copy-col">
+          <div className="home-leave home-leave--title">
+            <h1
+              className="home-enter home-enter--title home-names font-playfair text-foreground"
+              aria-label="Aaliyah Pirani"
+            >
+              <span className="home-name">
+                Aali<span className="font-playfair-italic">yah</span>
+              </span>
+              <span className="home-name">
+                Pir<span className="font-playfair-italic">ani</span>
+              </span>
+            </h1>
+          </div>
+          <div className="home-leave home-leave--copy">
+            <p className="home-enter home-enter--copy mt-4 font-montserrat text-xl text-foreground-red">
+              Third year HBSc student in Computer Science and Quantitative Biology at
+              the University of Toronto
+            </p>
+          </div>
+          <div className="home-leave home-leave--meta">
+            <p className="home-enter home-enter--meta max-w-md pt-4 pb-10 font-garamond text-xl text-foreground">
+              Graduating in April 2028
+            </p>
+          </div>
+          <div className="home-leave home-leave--actions">
+            <div className="home-enter home-enter--actions mt-10 flex flex-row gap-17">
+              <a
+                href="/AaliyahPirani_Resume.pdf"
+                download="AaliyahPirani_Resume.pdf"
+                className="border border-accent-red bg-background px-14 py-3 font-montserrat text-md text-accent-red shadow-[6px_6px_0_0_#45151b]"
               >
-                {(["first", "last"] as const).map((which) => (
-                  <span
-                    key={which}
-                    className={`home-name-hit home-name-hit--${which} ${hovered === which ? "is-hovered" : ""} ${openName === which ? "is-open" : ""}`}
-                    onMouseEnter={() => enterName(which)}
-                    onMouseLeave={leaveName}
-                  >
-                    <span className="home-name font-pinyon text-7xl">
-                      {which === "first" ? "Aaliyah" : "Pirani"}
-                    </span>
-                    <span
-                      id={which === "first" ? "home-name-note" : undefined}
-                      className="home-name-note font-garamond text-lg leading-relaxed text-accent-red"
-                      aria-hidden={openName !== which}
-                    >
-                      <span className="italic">{NAME_NOTES[which].label}.</span>{" "}
-                      {NAME_NOTES[which].body}
-                    </span>
-                  </span>
-                ))}
-              </h1>
-            </div>
-            <div className="home-leave home-leave--copy">
-              <p className="home-enter home-enter--copy mt-4 font-montserrat text-xl text-foreground-red">
-                Third year HBSc student in Computer Science and Quantitative Biology at
-                the University of Toronto
-              </p>
-            </div>
-            <div className="home-leave home-leave--meta">
-              <p className="home-enter home-enter--meta max-w-md pt-4 pb-10 font-garamond text-xl text-foreground">
-                Graduating in April 2028
-              </p>
-            </div>
-            <div className="home-leave home-leave--actions">
-              <div className="home-enter home-enter--actions mt-10 flex flex-row gap-17">
-                <a
-                  href="/AaliyahPirani_Resume.pdf"
-                  download="AaliyahPirani_Resume.pdf"
-                  className="border border-accent-red bg-background px-14 py-3 font-montserrat text-md text-accent-red shadow-[6px_6px_0_0_#45151b]"
-                >
-                  Resume
-                </a>
-                <a
-                  href="#contact"
-                  className="border border-accent-red bg-background px-14 py-3 font-montserrat text-md text-accent-red shadow-[6px_6px_0_0_#45151b]"
-                >
-                  Contact
-                </a>
-              </div>
+                Resume
+              </a>
+              <a
+                href="#contact"
+                className="border border-accent-red bg-background px-14 py-3 font-montserrat text-md text-accent-red shadow-[6px_6px_0_0_#45151b]"
+              >
+                Contact
+              </a>
             </div>
           </div>
         </div>
