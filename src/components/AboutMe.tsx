@@ -25,11 +25,10 @@ export default function AboutMe() {
       />
 
       <h2 className="relative text-center text-5xl text-foreground md:text-6xl">
-        <span className="font-pinyon pr-4 text-7xl">About</span>
-        <span className="ml-2 font-serif">me</span>
+        <span className="font-pinyon pr-4 text-7xl">About me</span>
       </h2>
 
-      <p className="relative mt-8 max-w-3xl text-center font-serif leading-relaxed text-foreground">
+      <p className="relative mt-8 max-w-3xl text-center font-montserrat leading-relaxed text-foreground">
         I’m a third year student at the University of Toronto studying computer
         science and quantitative biology as a double major. I’m relatively new to
         the world of tech, and actually first learned how to code when I started
@@ -44,7 +43,7 @@ export default function AboutMe() {
 
       <a
         href="https://www.instagram.com/aalipirani"
-        className="relative mt-12 border border-accent-red bg-background px-16 py-5 font-montserrat text-xl text-accent-red shadow-[6px_6px_0_0_#45151b]"
+        className="relative mt-8 border border-accent-red bg-background px-12 py-3 font-garamond text-xl text-accent-red shadow-[6px_6px_0_0_#45151b]"
       >
         Check out my Instagram!
       </a>

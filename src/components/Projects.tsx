@@ -123,9 +123,7 @@ export default function Projects() {
       <div className="flex text-center">
         <div className="bg-accent-mauve w-full h-full">
             <h1 className="flex flex-wrap items-baseline justify-center gap-x-4 px-4 pt-6 text-2xl text-background">
-                <span className="font-pinyon text-7xl">Awards</span>
-                <span className="font-imbue-light text-6xl">and</span>
-                <span className="font-pinyon text-7xl">Recognition</span>
+                <span className="pt-10 font-pinyon text-7xl">Awards and Recognition</span>
             </h1>
             <div className="mx-auto mt-12 flex w-full max-w-7xl flex-col divide-y divide-background/40 px-10 pb-8 text-left">
           {awards.map((award) => (

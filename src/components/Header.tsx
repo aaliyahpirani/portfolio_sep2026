@@ -51,15 +51,23 @@ export default function Header() {
       }`}
     >
       <nav className="flex items-center justify-between px-8 py-4 font-serif text-background">
-        <a href="#home" className="italic text-2xl">
-          Aaliyah Pirani
+        <a href="#home" className="nav-mark font-garamond text-2xl">
+          AP
         </a>
 
-        <div className="flex gap-6">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#experience">Experience</a>
+        <div className="flex gap-6 font-montserrat">
+          <a href="#home" className="nav-hover nav-hover--track">
+            Home
+          </a>
+          <a href="#about" className="nav-hover nav-hover--track">
+            About
+          </a>
+          <a href="#projects" className="nav-hover nav-hover--track">
+            Projects
+          </a>
+          <a href="#experience" className="nav-hover nav-hover--track">
+            Experience
+          </a>
         </div>
       </nav>
     </header>
