@@ -2,6 +2,11 @@ import { Geist, Geist_Mono, Source_Serif_4, Montserrat } from "next/font/google"
 import "./globals.css";
 import localFont from "next/font/local";
 
+export const metadata = {
+  title: "Aaliyah Pirani",
+  description: "Portfolio of Aaliyah Pirani",
+};
+
 const symphony = localFont({
   src: "./fonts/Symphony-Regular.ttf",
   variable: "--font-symphony",
