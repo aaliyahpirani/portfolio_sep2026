@@ -5,10 +5,12 @@ import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import FadeScroll from "@/components/FadeScroll";
 
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 bg-background text-foreground">
+      <FadeScroll />
       <Header />
 
       <main>

@@ -1,12 +1,15 @@
+import PointerWash from "@/components/PointerWash";
+
 export default function Footer() {
   return (
-    <footer className="bg-accent-red">
-      <div className="flex items-center justify-between px-8 py-4 font-serif text-background">
-        <p className="text-2xl italic">
-        © 2026 Aaliyah Pirani
+    <footer className="relative overflow-hidden bg-accent-red" data-fade-group>
+      <PointerWash tone="dark" />
+      <div className="relative z-[2] flex items-center justify-between px-8 py-4 font-serif text-background">
+        <p data-fade-item data-fade-index="0" className="text-2xl font-garamond">
+          © 2026 Aaliyah Pirani
         </p>
 
-        <div className="flex gap-6">
+        <div data-fade-item data-fade-index="1" className="flex gap-6">
           <a
             href="https://www.instagram.com/aalipirani"
             target="_blank"

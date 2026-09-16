@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import PointerWash from "@/components/PointerWash";
 
 const HEADLINE = "Something you probably wouldn’t have guessed about me...";
 const BODY = "I got my private pilot’s license through the air cadet program when I was 17!";
@@ -48,14 +49,13 @@ export default function PilotLicense() {
     const update = () => {
       const rect = root.getBoundingClientRect();
       const vh = window.innerHeight;
-      const fadeIn = Math.min(1, Math.max(0, (vh - rect.top) / (vh * 0.42)));
-      const leaveSpan = Math.max(rect.height * 0.85, 1);
-      const fadeOut = Math.min(1, Math.max(0, -rect.top / leaveSpan));
-      root.style.setProperty("--band-enter", fadeIn.toFixed(4));
-      root.style.setProperty("--band-leave", fadeOut.toFixed(4));
-      root.style.setProperty("--stripe-x", `${(-window.scrollY * 0.4).toFixed(1)}px`);
+      const fadeIn = rect.top < vh ? 1 : 0;
+      const fadeOut = rect.top < 0 ? 1 : 0;
+      root.style.setProperty("--band-enter", String(fadeIn));
+      root.style.setProperty("--band-leave", String(fadeOut));
+      root.style.setProperty("--stripe-x", `${(-window.scrollY * 0.55).toFixed(1)}px`);
 
-      if (!started && fadeIn > 0.35) {
+      if (!started && fadeIn === 1) {
         started = true;
         setPhase("headline");
       }
@@ -98,9 +98,14 @@ export default function PilotLicense() {
   }, [phase]);
 
   return (
-    <div ref={rootRef} className="home-band relative bg-accent-mauve">
+    <div
+      ref={rootRef}
+      data-fade-group
+      className="home-band relative overflow-hidden bg-accent-mauve py-6"
+    >
+      <PointerWash tone="dark" />
       <div
-        className="accent-stripes home-band-item home-band-item--stripes pointer-events-none absolute inset-0"
+        className="accent-stripes home-band-item home-band-item--stripes pointer-events-none"
         aria-hidden="true"
       />
       <div className="relative">
