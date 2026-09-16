@@ -124,8 +124,8 @@ export default function Experience() {
       className="relative flex min-h-screen flex-col overflow-hidden px-6 py-24 sm:px-20 md:px-16 lg:px-24 xl:px-32"
     >
       <PointerWash />
-      <h2 className="relative z-10 mb-16 text-center text-5xl text-foreground md:text-6xl">
-        <span className="font-serif text-7xl">Experience</span>
+      <h2 className="relative z-10 mb-10 text-center text-foreground md:mb-16">
+        <span className="font-serif text-4xl sm:text-5xl md:text-7xl">Experience</span>
       </h2>
 
       <div className="stem-timeline relative z-[2]">

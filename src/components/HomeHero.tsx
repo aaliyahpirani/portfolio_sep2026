@@ -81,12 +81,23 @@ export default function HomeHero() {
             data-fade-index="0"
             className="home-leave home-leave--portrait"
           >
-            <div className="home-enter--portrait">
+            <div className="home-enter--portrait md:hidden">
+              <Image
+                src="/portrait_horitz.jpg"
+                alt="Aaliyah Pirani"
+                fill
+                sizes="100vw"
+                className="home-portrait-image home-portrait-image--horiz"
+                priority
+                unoptimized
+              />
+            </div>
+            <div className="home-enter--portrait hidden md:block">
               <Image
                 src="/portrait.jpg"
                 alt="Aaliyah Pirani"
                 fill
-                sizes="(min-width: 768px) 33vw, 100vw"
+                sizes="33vw"
                 className="home-portrait-image"
                 priority
                 unoptimized
@@ -127,18 +138,18 @@ export default function HomeHero() {
           <div
             data-fade-item
             data-fade-index="4"
-            className="mt-10 flex flex-row gap-17"
+            className="mt-10 flex flex-row gap-4 sm:gap-10 md:gap-17"
           >
             <a
               href="/AaliyahPirani_Resume.pdf"
               download="AaliyahPirani_Resume.pdf"
-              className="border border-accent-red bg-background px-14 py-3 font-montserrat text-md text-accent-red shadow-[6px_6px_0_0_#45151b]"
+              className="border border-accent-red bg-background px-8 py-3 font-montserrat text-md text-accent-red shadow-[6px_6px_0_0_#45151b] sm:px-14"
             >
               Resume
             </a>
             <a
               href="#contact"
-              className="border border-accent-red bg-background px-14 py-3 font-montserrat text-md text-accent-red shadow-[6px_6px_0_0_#45151b]"
+              className="border border-accent-red bg-background px-8 py-3 font-montserrat text-md text-accent-red shadow-[6px_6px_0_0_#45151b] sm:px-14"
             >
               Contact
             </a>

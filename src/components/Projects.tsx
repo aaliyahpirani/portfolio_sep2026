@@ -189,13 +189,13 @@ export default function Projects() {
           Selected work from school, research, and things I built to learn.
         </p>
 
-        <div className="projects-scroll relative z-[2] mt-12 flex w-full max-w-7xl flex-row gap-12 pb-8">
+        <div className="relative z-[2] mt-12 flex w-full max-w-7xl flex-col gap-10 pb-8 md:flex-row md:gap-12 md:overflow-x-scroll projects-scroll">
           {projects.map((project, index) => (
             <article
               key={project.title}
               data-fade-item
               data-fade-index={index + 2}
-              className="w-[calc((100%-6rem)/3)] shrink-0"
+              className="w-full md:w-[calc((100%-6rem)/3)] md:shrink-0"
             >
               <h3 className="font-serif text-2xl text-accent-red">
                 {project.title}

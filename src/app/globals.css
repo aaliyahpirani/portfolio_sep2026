@@ -109,7 +109,8 @@ body {
 
 .home-portrait-panel {
   position: relative;
-  min-height: 42vh;
+  min-height: 36vh;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   background: transparent;
 }
@@ -117,6 +118,7 @@ body {
 @media (min-width: 768px) {
   .home-portrait-panel {
     min-height: 0;
+    aspect-ratio: auto;
     align-self: stretch;
     height: 100%;
   }
@@ -125,6 +127,10 @@ body {
 .home-portrait-image {
   object-fit: cover;
   object-position: center 18%;
+}
+
+.home-portrait-image--horiz {
+  object-position: center 40%;
 }
 
 .home-copy-col {
@@ -360,7 +366,13 @@ body {
 }
 
 .projects-scroll {
-  overflow-x: scroll;
+  overflow-x: visible;
+}
+
+@media (min-width: 768px) {
+  .projects-scroll {
+    overflow-x: scroll;
+  }
 }
 
 .projects-scroll::-webkit-scrollbar {

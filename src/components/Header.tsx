@@ -50,12 +50,12 @@ export default function Header() {
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      <nav className="flex items-center justify-between px-8 py-4 font-serif text-background">
-        <a href="#home" className="nav-mark font-garamond text-2xl">
+      <nav className="flex items-center justify-between px-4 py-3 font-serif text-background sm:px-8 sm:py-4">
+        <a href="#home" className="nav-mark font-garamond text-xl sm:text-2xl">
           AP
         </a>
 
-        <div className="flex gap-6 font-montserrat">
+        <div className="flex gap-3 text-sm font-montserrat sm:gap-6 sm:text-base">
           <a href="#home" className="nav-hover nav-hover--track">
             Home
           </a>
